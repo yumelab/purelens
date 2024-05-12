@@ -1,4 +1,4 @@
-package com.yumelabs.cleanbox
+package com.yumelabs.cleanbox.common
 
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.ViewModel

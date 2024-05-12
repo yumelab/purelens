@@ -1,4 +1,4 @@
-package com.yumelabs.cleanbox
+package com.yumelabs.cleanbox.filereader
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.yumelabs.cleanbox.R
 
 class ImageAdapter (private val context: Context, private val imageList: List<Image>):
     RecyclerView.Adapter<ImageAdapter.ContentViewHolder>() {

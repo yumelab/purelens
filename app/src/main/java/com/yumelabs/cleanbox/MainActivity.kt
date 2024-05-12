@@ -11,7 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.permissionx.guolindev.PermissionX
+import com.yumelabs.cleanbox.common.logd
+import com.yumelabs.cleanbox.common.AsyncTask
+import com.yumelabs.cleanbox.filereader.Image
+import com.yumelabs.cleanbox.filereader.OnItemClickListener
 import com.yumelabs.cleanbox.databinding.ActivityMainBinding
+import com.yumelabs.cleanbox.filereader.ImageAdapter
 import java.io.IOException
 
 
@@ -43,6 +48,10 @@ class MainActivity : AppCompatActivity() {
             )
         }
         checkPermissions(permissions)
+
+        binding.fabSettings.setOnClickListener {
+            startBottomFragment()
+        }
     }
 
     override fun onResume() {
@@ -105,6 +114,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return  tempList
+    }
+
+    /*----Bottom sheet-------------------*/
+    private fun startBottomFragment(){
+        val settingsBottomFragment = SettingsFragment()
+        settingsBottomFragment.show(supportFragmentManager, "SettingsBottomSheet")
     }
 
     private fun checkPermissions(permissions: List<String>){
