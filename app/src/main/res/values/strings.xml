@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">cleanbox</string>
     <string name="settings">settings</string>
+    <string name="name">Name</string>
+    <string name="date_modified">Date Modified</string>
+    <string name="size">Size</string>
 </resources>

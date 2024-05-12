@@ -4,6 +4,8 @@ import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     private var imageAdapter: ImageAdapter? = null
     private var linearLayoutManager: LinearLayoutManager?=null
 
+    private var scaleGestureDetector:ScaleGestureDetector?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -52,6 +56,8 @@ class MainActivity : AppCompatActivity() {
         binding.fabSettings.setOnClickListener {
             startBottomFragment()
         }
+
+        scaleGestureDetector = ScaleGestureDetector(this, CustomGestureListener(binding.imageGridView))
     }
 
     override fun onResume() {
@@ -65,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         linearLayoutManager = GridLayoutManager(this, 2)
         imageAdapter = ImageAdapter(this, imageList)
 
-        binding.musicListView.apply{
+        binding.imageGridView.apply{
             adapter = imageAdapter
             layoutManager = linearLayoutManager
         }
@@ -116,6 +122,12 @@ class MainActivity : AppCompatActivity() {
         return  tempList
     }
 
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        scaleGestureDetector?.onTouchEvent(event)
+        return true
+    }
+
+
     /*----Bottom sheet-------------------*/
     private fun startBottomFragment(){
         val settingsBottomFragment = SettingsFragment()
@@ -133,4 +145,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
+
 }

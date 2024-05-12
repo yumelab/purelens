@@ -8,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButton.OnCheckedChangeListener
 import com.yumelabs.cleanbox.common.ViewBindingHolder
 import com.yumelabs.cleanbox.common.ViewBindingHolderImpl
+import com.yumelabs.cleanbox.common.logd
 import com.yumelabs.cleanbox.databinding.FragmentSettingsListDialogItemBinding
 import com.yumelabs.cleanbox.databinding.FragmentSettingsListDialogBinding
 
@@ -35,39 +38,14 @@ class SettingsFragment : BottomSheetDialogFragment(), ViewBindingHolder<Fragment
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        activity?.findViewById<RecyclerView>(R.id.list)?.layoutManager =
-            LinearLayoutManager(context)
-        activity?.findViewById<RecyclerView>(R.id.list)?.adapter =
-            arguments?.getInt(ARG_ITEM_COUNT)?.let { ItemAdapter(it) }
-    }
+        binding?.sortingOrder?.setOnCheckedChangeListener{ group, checkedId ->
 
-    private inner class ViewHolder internal constructor(binding: FragmentSettingsListDialogItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        internal val text: TextView = binding.text
-    }
-
-    private inner class ItemAdapter internal constructor(private val mItemCount: Int) :
-        RecyclerView.Adapter<ViewHolder>() {
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-            return ViewHolder(
-                FragmentSettingsListDialogItemBinding.inflate(
-                    LayoutInflater.from(
-                        parent.context
-                    ), parent, false
-                )
-            )
-
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.text.text = position.toString()
-        }
-
-        override fun getItemCount(): Int {
-            return mItemCount
+            when(checkedId){
+                R.id.sort_name -> "By Name".logd()
+                R.id.sort_date -> "By Date".logd()
+                R.id.sort_size -> "By Size".logd()
+                else -> "first".logd()
+            }
         }
     }
 
