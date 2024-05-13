@@ -1,12 +1,14 @@
 package com.yumelabs.cleanbox
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
+import android.view.View.OnTouchListener
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private val imageList:ArrayList<Image> = arrayListOf()
     private var imageAdapter: ImageAdapter? = null
-    private var linearLayoutManager: LinearLayoutManager?=null
+    private var gridLayoutManager:ArrayList<GridLayoutManager> = arrayListOf()
 
     private var scaleGestureDetector:ScaleGestureDetector?=null
 
@@ -57,7 +59,11 @@ class MainActivity : AppCompatActivity() {
             startBottomFragment()
         }
 
-        scaleGestureDetector = ScaleGestureDetector(this, CustomGestureListener(binding.imageGridView))
+        for (i in 0..3){
+            gridLayoutManager.add(GridLayoutManager(this, i+2))
+        }
+
+        scaleGestureDetector = ScaleGestureDetector(this, CustomGestureListener())
     }
 
     override fun onResume() {
@@ -68,12 +74,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun imageInit(){
         /*-----Music player code----*/
-        linearLayoutManager = GridLayoutManager(this, 2)
         imageAdapter = ImageAdapter(this, imageList)
 
         binding.imageGridView.apply{
             adapter = imageAdapter
-            layoutManager = linearLayoutManager
+            layoutManager = gridLayoutManager[1]
         }
 
         imageAdapter?.setOnItemClickListener(object : OnItemClickListener {
@@ -122,10 +127,10 @@ class MainActivity : AppCompatActivity() {
         return  tempList
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        scaleGestureDetector?.onTouchEvent(event)
-        return true
-    }
+//    override fun dispatchTouchEvent(event: MotionEvent): Boolean { // it is working but scrolling has now stopped
+//        scaleGestureDetector?.onTouchEvent(event)
+//        return true
+//    }
 
 
     /*----Bottom sheet-------------------*/

@@ -4,7 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Settings
 import android.util.Log
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.DecelerateInterpolator
 import com.yumelabs.cleanbox.BuildConfig
+
 
 fun openAccessibilitySettings(context: Context){
     val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)

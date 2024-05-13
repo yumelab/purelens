@@ -48,16 +48,4 @@ class ImageAdapter (private val context: Context, private val imageList: List<Im
     fun setOnItemClickListener(listener: OnItemClickListener) {
         onItemClickListener = listener
     }
-
-    private fun millisecondsToTime(milliseconds: Long): String? {
-        val minutes = milliseconds / 1000 / 60
-        val seconds = milliseconds / 1000 % 60
-        val secondsStr = seconds.toString()
-        val secs: String = if (secondsStr.length >= 2) {
-            secondsStr.substring(0, 2)
-        } else {
-            "0$secondsStr"
-        }
-        return "$minutes:$secs"
-    }
 }
