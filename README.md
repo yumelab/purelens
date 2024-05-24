@@ -1,0 +1,1 @@
+An app to clean your Gallery with AI powered image score. Tinder like gesture allows you to swipe left to discard and right to keep your favoratie images. This app would not delete anything but it will keep them in the trash which you can empty later, once you are ready.
